@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace DiscordRP
 {
@@ -11,9 +10,24 @@ namespace DiscordRP
         {
             AvailablePart availablePart = PartLoader.getPartInfoByName(part.name);
 
-            if (availablePart != null)
+            if (availablePart != null && availablePart.costsFunds)
             {
                 float cost = availablePart.cost;
+
+                foreach (PartResource resource in part.Resources)
+                {
+                    double unusedAmount = resource.maxAmount - resource.amount;
+                    cost -= (float) (unusedAmount * PartResourceLibrary.Instance.GetDefinition(resource.resourceName).unitCost);
+                }
+
+                foreach (PartModule module in part.Modules)
+                {
+                    if (module is IPartCostModifier)
+                    {
+                        IPartCostModifier costModifier = module as IPartCostModifier;
+                        cost = costModifier.GetModuleCost(cost, ModifierStagingSituation.CURRENT);
+                    }
+                }
 
                 foreach (Part child in part.children)
                 {

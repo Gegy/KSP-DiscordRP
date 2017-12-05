@@ -31,7 +31,7 @@ namespace DiscordRP.States
             return new DiscordRpc.RichPresence()
             {
                 state = "Building a craft",
-                details = string.Format("Cst: ${1} | Prts: {0}", partCount, cost),
+                details = string.Format("Cst: ${1:F0} | Prts: {0}", partCount, cost),
                 largeImageKey = "building_craft",
                 largeImageText = "Building a craft",
                 startTimestamp = 0,
