@@ -7,11 +7,13 @@ namespace DiscordRP.States
     {
         private readonly int partCount;
         private readonly double cost;
+        private readonly long startTimestamp;
 
-        public BuildingState(int partCount, double cost)
+        public BuildingState(int partCount, double cost, long startTimestamp)
         {
             this.partCount = partCount;
             this.cost = cost;
+            this.startTimestamp = startTimestamp;
         }
 
         public override bool Equals(object obj)
@@ -20,7 +22,7 @@ namespace DiscordRP.States
             {
                 BuildingState buildingState = (BuildingState) obj;
 
-                return buildingState.cost == cost && buildingState.partCount == partCount;
+                return buildingState.cost == cost && buildingState.partCount == partCount && buildingState.startTimestamp == startTimestamp; ;
             }
 
             return false;
@@ -34,7 +36,7 @@ namespace DiscordRP.States
                 details = string.Format("Cst: ${1:F0} | Prts: {0}", partCount, cost),
                 largeImageKey = "building_craft",
                 largeImageText = "Building a craft",
-                startTimestamp = 0,
+                startTimestamp = startTimestamp,
                 smallImageKey = "default",
                 smallImageText = "Kerbal Space Program",
             };

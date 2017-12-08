@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace DiscordRP.States
 {
-    class LandedState : PresenceState
+    class SplashedState : PresenceState
     {
         private readonly CelestialBody body;
         private readonly double latitude;
         private readonly double longitude;
         private readonly long startTimestamp;
 
-        public LandedState(CelestialBody body, double latitude, double longitude, long startTimestamp)
+        public SplashedState(CelestialBody body, double latitude, double longitude, long startTimestamp)
         {
             this.body = body;
             this.latitude = latitude;
@@ -20,11 +20,11 @@ namespace DiscordRP.States
 
         public override bool Equals(object obj)
         {
-            if (obj != null && obj is LandedState)
+            if (obj != null && obj is SplashedState)
             {
-                LandedState landedState = (LandedState) obj;
+                SplashedState splashedState = (SplashedState) obj;
 
-                return landedState.body.Equals(body) && landedState.latitude == latitude && landedState.longitude == longitude && landedState.startTimestamp == startTimestamp;
+                return splashedState.body.Equals(body) && splashedState.latitude == latitude && splashedState.longitude == longitude && splashedState.startTimestamp == startTimestamp;
             }
 
             return false;
@@ -32,7 +32,7 @@ namespace DiscordRP.States
 
         public DiscordRpc.RichPresence create()
         {
-            string state = state = string.Format("Landed at {0}", body.name);
+            string state = state = string.Format("Splashed down at {0}", body.name);
 
             return new DiscordRpc.RichPresence()
             {

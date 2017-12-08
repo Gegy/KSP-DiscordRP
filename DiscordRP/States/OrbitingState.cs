@@ -37,7 +37,7 @@ namespace DiscordRP.States
             return new DiscordRpc.RichPresence()
             {
                 state = state,
-                details = string.Format("SMA: {0:F0}km | Ec: {1:F2}", semiMajorAxis / 1000.0, eccentricity),
+                details = string.Format("SMA: {0} | Ec: {1:F2}", Utils.FormatDistance(semiMajorAxis), eccentricity),
                 largeImageKey = string.Format("body_{0}", body.name.ToLower()),
                 largeImageText = body.name,
                 startTimestamp = startTimestamp,

@@ -63,5 +63,31 @@ namespace DiscordRP
         {
             return IntPtr.Size == 8;
         }
+
+        public static double GetApoapsis(Orbit orbit)
+        {
+            return orbit.semiMajorAxis * (1.0 + orbit.eccentricity);
+        }
+
+        public static double GetPeriapsis(Orbit orbit)
+        {
+            return orbit.semiMajorAxis * (1.0 - orbit.eccentricity);
+        }
+
+        public static String FormatDistance(double distance)
+        {
+            if (distance > 2000000)
+            {
+                return string.Format("{0:F0}Mm", distance / 1000000.0);
+            }
+            else if (distance > 2000)
+            {
+                return string.Format("{0:F0}km", distance / 1000.0);
+            }
+            else
+            {
+                return string.Format("{0:F0}m", distance);
+            }
+        }
     }
 }

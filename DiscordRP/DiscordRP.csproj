@@ -60,6 +60,8 @@
     <Compile Include="States\OrbitingState.cs" />
     <Compile Include="States\PresenceState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="States\SplashedState.cs" />
+    <Compile Include="StateTracker.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
