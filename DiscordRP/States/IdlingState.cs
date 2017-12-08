@@ -27,12 +27,16 @@ namespace DiscordRP.States
 
         public DiscordRpc.RichPresence create()
         {
+            string sceneDescription = GetSceneDescription();
+
             return new DiscordRpc.RichPresence()
             {
                 state = "Idle",
-                details = GetSceneDescription(),
+                details = sceneDescription,
                 largeImageKey = "default",
                 largeImageText = "Idling",
+                smallImageKey = GetSmallIcon(),
+                smallImageText = sceneDescription,
                 startTimestamp = startTimestamp,
             };
         }
@@ -57,6 +61,26 @@ namespace DiscordRP.States
             }
 
             return scene.ToString();
+        }
+
+        private String GetSmallIcon()
+        {
+            switch (scene)
+            {
+                case GameScenes.LOADING:
+                case GameScenes.LOADINGBUFFER:
+                    return "loading";
+                case GameScenes.SETTINGS:
+                    return "settings";
+                case GameScenes.SPACECENTER:
+                    return "space_center";
+                case GameScenes.TRACKSTATION:
+                    return "tracking_station";
+                case GameScenes.CREDITS:
+                    return "heart";
+            }
+
+            return "";
         }
     }
 }
