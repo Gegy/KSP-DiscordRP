@@ -48,7 +48,7 @@ namespace DiscordRP
                 }
                 else if (rootEditorPart != null)
                 {
-                    return new BuildingState(Utils.GetTotalParts(rootEditorPart), Utils.GetCost(rootEditorPart), buildingStateTimer.Timestamp);
+                    return new BuildingState(Utils.GetTotalParts(rootEditorPart), Utils.GetTotalCost(rootEditorPart), buildingStateTimer.Timestamp);
                 }
             }
 
@@ -57,8 +57,8 @@ namespace DiscordRP
 
         private PresenceState GetFlightState(Vessel activeVessel)
         {
-            double periapsis = Utils.GetPeriapsis(activeVessel.orbit);
-            double apoapsis = Utils.GetApoapsis(activeVessel.orbit);
+            double periapsis = activeVessel.orbit.GetPeriapsis();
+            double apoapsis = activeVessel.orbit.GetApoapsis();
 
             if (activeVessel.Landed)
             {

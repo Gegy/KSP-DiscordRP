@@ -2,11 +2,11 @@
 
 namespace DiscordRP
 {
-    class Utils
+    static class Utils
     {
         private static readonly DateTime EPOCH = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        public static float GetCost(Part part)
+        public static float GetTotalCost(Part part)
         {
             AvailablePart availablePart = PartLoader.getPartInfoByName(part.name);
 
@@ -31,7 +31,7 @@ namespace DiscordRP
 
                 foreach (Part child in part.children)
                 {
-                    cost += GetCost(child);
+                    cost += GetTotalCost(child);
                 }
 
                 return cost;
@@ -64,12 +64,12 @@ namespace DiscordRP
             return IntPtr.Size == 8;
         }
 
-        public static double GetApoapsis(Orbit orbit)
+        public static double GetApoapsis(this Orbit orbit)
         {
             return orbit.semiMajorAxis * (1.0 + orbit.eccentricity);
         }
 
-        public static double GetPeriapsis(Orbit orbit)
+        public static double GetPeriapsis(this Orbit orbit)
         {
             return orbit.semiMajorAxis * (1.0 - orbit.eccentricity);
         }
