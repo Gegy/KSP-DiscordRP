@@ -16,7 +16,7 @@ namespace DiscordRP
         private PresenceState state;
 
         private float lastUpdate = 0.0F;
-        private float updateInterval = 10.0F;
+        private float updateInterval = 8.0F;
 
         private bool initialized;
 
@@ -37,6 +37,20 @@ namespace DiscordRP
             presenceController.Initialize();
 
             DontDestroyOnLoad(this);
+
+            GameEvents.onGamePause.Add(() =>
+            {
+                stateTracker.Paused = true;
+
+                UpdatePresence(stateTracker.UpdateState());
+            });
+
+            GameEvents.onGameUnpause.Add(() =>
+            {
+                stateTracker.Paused = false;
+
+                UpdatePresence(stateTracker.UpdateState());
+            });
         }
 
         void OnDisable()
@@ -59,16 +73,21 @@ namespace DiscordRP
             {
                 lastUpdate = currentTime;
 
-                PresenceState previousState = state;
-                
-                state = stateTracker.UpdateState();
-
-                if (!state.Equals(previousState) || !initialized)
-                {
-                    presenceController.UpdatePresence(state);
-                }
+                UpdatePresence(stateTracker.UpdateState());
 
                 initialized = true;
+            }
+        }
+
+        private void UpdatePresence(PresenceState state)
+        {
+            PresenceState previousState = this.state;
+
+            this.state = state;
+
+            if (!state.Equals(previousState) || !initialized)
+            {
+                presenceController.UpdatePresence(state);
             }
         }
     }

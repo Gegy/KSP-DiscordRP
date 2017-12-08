@@ -74,7 +74,7 @@ namespace DiscordRP
             return orbit.semiMajorAxis * (1.0 - orbit.eccentricity);
         }
 
-        public static String FormatDistance(double distance)
+        public static string FormatDistance(double distance)
         {
             if (distance > 2000000)
             {
@@ -87,6 +87,30 @@ namespace DiscordRP
             else
             {
                 return string.Format("{0:F0}m", distance);
+            }
+        }
+
+        public static string GetSmallFlightIcon(bool paused)
+        {
+            if (paused)
+            {
+                return "paused";
+            }
+            else
+            {
+                return "default";
+            }
+        }
+
+        public static string GetSmallFlightIconDetails(bool paused)
+        {
+            if (paused)
+            {
+                return "Paused game";
+            }
+            else
+            {
+                return "Kerbal Space Program";
             }
         }
     }

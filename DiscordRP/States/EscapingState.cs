@@ -7,11 +7,13 @@ namespace DiscordRP.States
     {
         private readonly CelestialBody body;
         private readonly long startTimestamp;
+        private readonly bool paused;
 
-        public EscapingState(CelestialBody body, long startTimestamp)
+        public EscapingState(CelestialBody body, long startTimestamp, bool paused)
         {
             this.body = body;
             this.startTimestamp = startTimestamp;
+            this.paused = paused;
         }
 
         public override bool Equals(object obj)
@@ -20,7 +22,7 @@ namespace DiscordRP.States
             {
                 EscapingState escapingState = (EscapingState) obj;
 
-                return escapingState.body.Equals(body) && escapingState.startTimestamp == startTimestamp;
+                return escapingState.body.Equals(body) && escapingState.startTimestamp == startTimestamp && escapingState.paused == paused;
             }
 
             return false;
@@ -37,8 +39,8 @@ namespace DiscordRP.States
                 largeImageKey = string.Format("body_{0}", body.name.ToLower()),
                 largeImageText = body.name,
                 startTimestamp = startTimestamp,
-                smallImageKey = "default",
-                smallImageText = "Kerbal Space Program",
+                smallImageKey = Utils.GetSmallFlightIcon(paused),
+                smallImageText = Utils.GetSmallFlightIconDetails(paused),
             };
         }
     }

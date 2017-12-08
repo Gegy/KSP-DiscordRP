@@ -13,6 +13,8 @@ namespace DiscordRP
 
         private readonly GameStateTimer idleStateTimer;
 
+        public bool Paused { private get; set; }
+
         public StateTracker()
         {
             this.launchStateTimer = new GameStateTimer(scene => HighLogic.LoadedSceneIsGame && FlightGlobals.ActiveVessel != null, scene => !FlightGlobals.ActiveVessel.Landed && !FlightGlobals.ActiveVessel.Splashed);
@@ -62,23 +64,23 @@ namespace DiscordRP
 
             if (activeVessel.Landed)
             {
-                return new LandedState(activeVessel.mainBody, activeVessel.latitude, activeVessel.longitude, landedStateTimer.Timestamp);
+                return new LandedState(activeVessel.mainBody, activeVessel.latitude, activeVessel.longitude, landedStateTimer.Timestamp, Paused);
             }
             else if (activeVessel.Splashed)
             {
-                return new SplashedState(activeVessel.mainBody, activeVessel.latitude, activeVessel.longitude, landedStateTimer.Timestamp);
+                return new SplashedState(activeVessel.mainBody, activeVessel.latitude, activeVessel.longitude, landedStateTimer.Timestamp, Paused);
             }
             else if (apoapsis > activeVessel.mainBody.sphereOfInfluence || (apoapsis < 0.0 && periapsis > apoapsis))
             {
-                return new EscapingState(activeVessel.mainBody, launchStateTimer.Timestamp);
+                return new EscapingState(activeVessel.mainBody, launchStateTimer.Timestamp, Paused);
             }
             else if (activeVessel.mainBody.atmosphereDepth > activeVessel.altitude || periapsis < activeVessel.mainBody.Radius)
             {
-                return new FlyingState(activeVessel.mainBody, activeVessel.altitude, activeVessel.srfSpeed, launchStateTimer.Timestamp);
+                return new FlyingState(activeVessel.mainBody, activeVessel.altitude, activeVessel.srfSpeed, launchStateTimer.Timestamp, Paused);
             }
             else
             {
-                return new OrbitingState(activeVessel.mainBody, activeVessel.orbit.semiMajorAxis, activeVessel.orbit.eccentricity, launchStateTimer.Timestamp);
+                return new OrbitingState(activeVessel.mainBody, activeVessel.orbit.semiMajorAxis, activeVessel.orbit.eccentricity, launchStateTimer.Timestamp, Paused);
             }
         }
     }

@@ -9,13 +9,15 @@ namespace DiscordRP.States
         private readonly double semiMajorAxis;
         private readonly double eccentricity;
         private readonly long startTimestamp;
+        private readonly bool paused;
 
-        public OrbitingState(CelestialBody body, double semiMajorAxis, double eccentricity, long startTimestamp)
+        public OrbitingState(CelestialBody body, double semiMajorAxis, double eccentricity, long startTimestamp, bool paused)
         {
             this.body = body;
             this.semiMajorAxis = semiMajorAxis;
             this.eccentricity = eccentricity;
             this.startTimestamp = startTimestamp;
+            this.paused = paused;
         }
 
         public override bool Equals(object obj)
@@ -24,7 +26,7 @@ namespace DiscordRP.States
             {
                 OrbitingState orbitingState = (OrbitingState) obj;
 
-                return orbitingState.body.Equals(body) && orbitingState.semiMajorAxis == semiMajorAxis && orbitingState.eccentricity == eccentricity && orbitingState.startTimestamp == startTimestamp;
+                return orbitingState.body.Equals(body) && orbitingState.semiMajorAxis == semiMajorAxis && orbitingState.eccentricity == eccentricity && orbitingState.startTimestamp == startTimestamp && orbitingState.paused == paused;
             }
 
             return false;
@@ -41,8 +43,8 @@ namespace DiscordRP.States
                 largeImageKey = string.Format("body_{0}", body.name.ToLower()),
                 largeImageText = body.name,
                 startTimestamp = startTimestamp,
-                smallImageKey = "default",
-                smallImageText = "Kerbal Space Program",
+                smallImageKey = Utils.GetSmallFlightIcon(paused),
+                smallImageText = Utils.GetSmallFlightIconDetails(paused),
             };
         }
     }

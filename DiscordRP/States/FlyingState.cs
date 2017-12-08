@@ -9,13 +9,15 @@ namespace DiscordRP.States
         private readonly double altitude;
         private readonly double velocity;
         private readonly long startTimestamp;
+        private readonly bool paused;
 
-        public FlyingState(CelestialBody body, double altitude, double velocity, long startTimestamp)
+        public FlyingState(CelestialBody body, double altitude, double velocity, long startTimestamp, bool paused)
         {
             this.body = body;
             this.altitude = altitude;
             this.velocity = velocity;
             this.startTimestamp = startTimestamp;
+            this.paused = paused;
         }
 
         public override bool Equals(object obj)
@@ -24,7 +26,7 @@ namespace DiscordRP.States
             {
                 FlyingState flyingState = (FlyingState) obj;
 
-                return flyingState.body.Equals(body) && flyingState.altitude == altitude && flyingState.velocity == velocity && flyingState.startTimestamp == startTimestamp;
+                return flyingState.body.Equals(body) && flyingState.altitude == altitude && flyingState.velocity == velocity && flyingState.startTimestamp == startTimestamp && flyingState.paused == paused;
             }
 
             return false;
@@ -41,8 +43,8 @@ namespace DiscordRP.States
                 largeImageKey = string.Format("body_{0}", body.name.ToLower()),
                 largeImageText = body.name,
                 startTimestamp = startTimestamp,
-                smallImageKey = "default",
-                smallImageText = "Kerbal Space Program",
+                smallImageKey = Utils.GetSmallFlightIcon(paused),
+                smallImageText = Utils.GetSmallFlightIconDetails(paused),
             };
         }
     }
