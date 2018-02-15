@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace DiscordRP
 {
@@ -57,6 +58,17 @@ namespace DiscordRP
         public static long GetEpochTime()
         {
             return (long) (DateTime.UtcNow - EPOCH).TotalSeconds;
+        }
+
+        public static bool IsWindows()
+        {
+            return Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor;
+        }
+
+        public static bool IsOSX()
+        {
+            Debug.Log(string.Format("DiscordRP: Detected OS: {0}", Application.platform));
+            return Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor;
         }
 
         public static bool Is64BitProcess()

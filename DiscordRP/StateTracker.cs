@@ -12,7 +12,7 @@ namespace DiscordRP
         private readonly GameStateTimer buildingStateTimer;
 
         private readonly GameStateTimer idleStateTimer;
-
+        
         public bool Paused { private get; set; }
 
         public StateTracker()

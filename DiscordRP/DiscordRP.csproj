@@ -50,7 +50,12 @@
   <ItemGroup>
     <Compile Include="DiscordRPMod.cs" />
     <Compile Include="Discord\DiscordRpc.cs" />
+    <Compile Include="Discord\DiscordRpcInvoker.cs" />
+    <Compile Include="Discord\LinuxInvoker.cs" />
     <Compile Include="Discord\PresenceController.cs" />
+    <Compile Include="Discord\OSXInvoker.cs" />
+    <Compile Include="Discord\Win64Invoker.cs" />
+    <Compile Include="Discord\Win32Invoker.cs" />
     <Compile Include="GameStateTimer.cs" />
     <Compile Include="States\BuildingState.cs" />
     <Compile Include="States\FlyingState.cs" />
@@ -65,12 +70,20 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Libraries\discord-rpc-32.lib">
+    <None Include="Libraries\linux\discord-rpc.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Libraries\discord-rpc-64.lib">
+    </None>
+    <None Include="Libraries\osx\discord-rpc.bin">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="Libraries\win32\discord-rpc.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libraries\win64\discord-rpc.bin">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -69,6 +69,7 @@ namespace DiscordRP.Discord
 
         public void RequestCallback(DiscordRpc.JoinRequest request)
         {
+            DiscordRpc.Respond(request.userId, DiscordRpc.Reply.Yes);
         }
     }
 }

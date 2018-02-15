@@ -16,23 +16,27 @@ namespace DiscordRP
         private PresenceState state;
 
         private float lastUpdate = 0.0F;
-        private float updateInterval = 8.0F;
+        private float updateInterval = 15.0F;
 
         private bool initialized;
 
         void Awake()
         {
-            Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + PLUGIN_DIRECTORY);
+            Debug.Log(string.Format("DiscordRP: Setting DLL scan directory: {0}", PLUGIN_DIRECTORY));
 
-            presenceController = new PresenceController();
+            string value = Environment.GetEnvironmentVariable("PATH") + ";" + PLUGIN_DIRECTORY;
+            Environment.SetEnvironmentVariable("PATH", value);
+            Debug.Log(string.Format("DiscordRP: Setting process PATH to: {0}", value));
 
             lastUpdate = Time.time;
             state = new IdlingState(Utils.GetEpochTime(), GameScenes.LOADING);
-            stateTracker = new StateTracker();
         }
 
         void Start()
         {
+            presenceController = new PresenceController();
+            stateTracker = new StateTracker();
+
             Debug.Log("DiscordRP: Plugin startup");
             presenceController.Initialize();
 
