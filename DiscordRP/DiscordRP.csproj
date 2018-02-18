@@ -70,10 +70,10 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Libraries\linux\discord-rpc.bin">
+    <None Include="Libraries\linux\discord-rpc.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Libraries\osx\discord-rpc.bin">
+    <None Include="Libraries\osx\discord-rpc.dylib">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Libraries\win32\discord-rpc.bin">

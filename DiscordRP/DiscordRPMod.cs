@@ -8,8 +8,6 @@ namespace DiscordRP
     [KSPAddon(KSPAddon.Startup.Instantly, true)]
     class DiscordRPMod : MonoBehaviour
     {
-        private static readonly string PLUGIN_DIRECTORY = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
         private PresenceController presenceController;
         private StateTracker stateTracker;
 
@@ -22,12 +20,6 @@ namespace DiscordRP
 
         void Awake()
         {
-            Debug.Log(string.Format("DiscordRP: Setting DLL scan directory: {0}", PLUGIN_DIRECTORY));
-
-            string value = Environment.GetEnvironmentVariable("PATH") + ";" + PLUGIN_DIRECTORY;
-            Environment.SetEnvironmentVariable("PATH", value);
-            Debug.Log(string.Format("DiscordRP: Setting process PATH to: {0}", value));
-
             lastUpdate = Time.time;
             state = new IdlingState(Utils.GetEpochTime(), GameScenes.LOADING);
         }

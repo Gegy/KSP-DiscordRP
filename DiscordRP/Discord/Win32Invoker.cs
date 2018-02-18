@@ -5,6 +5,8 @@ namespace DiscordRP.Discord
 {
     class Win32Invoker : DiscordRpcInvoker
     {
+        private const string DISCORD_RPC_LOCATION = "GameData/DiscordRP/Plugins/win32/discord-rpc.bin";
+
         public void Initialize(string applicationId, ref DiscordRpc.EventHandlers handlers, bool autoRegister, string optionalSteamId)
         {
             ExternInitialize(applicationId, ref handlers, autoRegister, optionalSteamId);
@@ -30,19 +32,19 @@ namespace DiscordRP.Discord
             ExternUpdatePresence(ref presence);
         }
 
-        [DllImport("win32/discord-rpc.bin", EntryPoint = "Discord_Initialize", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DISCORD_RPC_LOCATION, EntryPoint = "Discord_Initialize", CallingConvention = CallingConvention.Cdecl)]
         private static extern void ExternInitialize(string applicationId, ref DiscordRpc.EventHandlers handlers, bool autoRegister, string optionalSteamId);
 
-        [DllImport("win32/discord-rpc.bin", EntryPoint = "Discord_Shutdown", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DISCORD_RPC_LOCATION, EntryPoint = "Discord_Shutdown", CallingConvention = CallingConvention.Cdecl)]
         private static extern void ExternShutdown();
 
-        [DllImport("win32/discord-rpc.bin", EntryPoint = "Discord_RunCallbacks", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DISCORD_RPC_LOCATION, EntryPoint = "Discord_RunCallbacks", CallingConvention = CallingConvention.Cdecl)]
         private static extern void ExternRunCallbacks();
 
-        [DllImport("win32/discord-rpc.bin", EntryPoint = "Discord_UpdatePresence", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DISCORD_RPC_LOCATION, EntryPoint = "Discord_UpdatePresence", CallingConvention = CallingConvention.Cdecl)]
         private static extern void ExternUpdatePresence(ref DiscordRpc.RichPresence presence);
 
-        [DllImport("win32/discord-rpc.bin", EntryPoint = "Discord_Respond", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(DISCORD_RPC_LOCATION, EntryPoint = "Discord_Respond", CallingConvention = CallingConvention.Cdecl)]
         private static extern void ExternRespond(string userId, DiscordRpc.Reply reply);
     }
 }
