@@ -40,8 +40,8 @@ namespace DiscordRP.States
             {
                 state = state,
                 details = string.Format("Lat: {0:F3} | Lng: {1:F3}", latitude, longitude),
-                largeImageKey = string.Format("body_{0}", body.name.ToLower()),
-                largeImageText = body.name,
+                largeImageKey = string.Format("body_{0}", body.displayName.ToLower()),
+                largeImageText = body.displayName,
                 startTimestamp = startTimestamp,
                 smallImageKey = Utils.GetSmallFlightIcon(paused),
                 smallImageText = Utils.GetSmallFlightIconDetails(paused),
