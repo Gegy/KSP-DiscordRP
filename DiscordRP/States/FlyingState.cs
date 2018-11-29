@@ -34,14 +34,14 @@ namespace DiscordRP.States
 
         public DiscordRpc.RichPresence create()
         {
-            string state = state = string.Format("Flying over {0}", body.displayName);
+            string state = state = string.Format("Flying over {0}", body.displayName ?? body.nme);
 
             return new DiscordRpc.RichPresence()
             {
                 state = state,
                 details = string.Format("Alt: {0:F0}m | Vel: {1:F0}m/s", altitude, velocity),
-                largeImageKey = string.Format("body_{0}", body.displayName.ToLower()),
-                largeImageText = body.name,
+                largeImageKey = string.Format("body_{0}", body.displayName.ToLower() ?? body.name.ToLower()),
+                largeImageText = body.displyName ?? body.name,
                 startTimestamp = startTimestamp,
                 smallImageKey = Utils.GetSmallFlightIcon(paused),
                 smallImageText = Utils.GetSmallFlightIconDetails(paused),
