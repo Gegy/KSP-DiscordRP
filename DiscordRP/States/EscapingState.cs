@@ -30,14 +30,14 @@ namespace DiscordRP.States
 
         public DiscordRpc.RichPresence create()
         {
-            string state = state = string.Format("Escaping {0}", body.name);
+            string state = state = string.Format("Escaping {0}", body.name ?? body.displayName);
 
             return new DiscordRpc.RichPresence()
             {
                 state = state,
                 details = "At escape velocity",
-                largeImageKey = string.Format("body_{0}", body.name.ToLower()),
-                largeImageText = body.name,
+                largeImageKey = string.Format("body_{0}", body.displayName.ToLower() ?? body.name.ToLower()),
+                largeImageText = body.displayName ?? body.name,
                 startTimestamp = startTimestamp,
                 smallImageKey = Utils.GetSmallFlightIcon(paused),
                 smallImageText = Utils.GetSmallFlightIconDetails(paused),
