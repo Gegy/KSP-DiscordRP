@@ -40,8 +40,8 @@ namespace DiscordRP.States
             {
                 state = state,
                 details = string.Format("SMA: {0} | Ec: {1:F2}", Utils.FormatDistance(semiMajorAxis), eccentricity),
-                largeImageKey = string.Format("body_{0}", body.displayName.ToLower()),
-                largeImageText = body.displayName,
+                largeImageKey = string.Format("body_{0}", body.displayName.ToLower() ?? body.name.ToLower()),
+                largeImageText = body.displayName ? body.nme,
                 startTimestamp = startTimestamp,
                 smallImageKey = Utils.GetSmallFlightIcon(paused),
                 smallImageText = Utils.GetSmallFlightIconDetails(paused),
