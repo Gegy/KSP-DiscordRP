@@ -34,14 +34,14 @@ namespace DiscordRP.States
 
         public DiscordRpc.RichPresence create()
         {
-            string state = state = string.Format("Splashed down at {0}", body.name);
+            string state = state = string.Format("Splashed down at {0}", body.displayName ?? body.name);
 
             return new DiscordRpc.RichPresence()
             {
                 state = state,
                 details = string.Format("Lat: {0:F3} | Lng: {1:F3}", latitude, longitude),
-                largeImageKey = string.Format("body_{0}", body.displayName.ToLower()),
-                largeImageText = body.displayName,
+                largeImageKey = string.Format("body_{0}", body.displayName.ToLower() ?? body.name.ToLower()),
+                largeImageText = body.displayName ?? body.name,
                 startTimestamp = startTimestamp,
                 smallImageKey = Utils.GetSmallFlightIcon(paused),
                 smallImageText = Utils.GetSmallFlightIconDetails(paused),
